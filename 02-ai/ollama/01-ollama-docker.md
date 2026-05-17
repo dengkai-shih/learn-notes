@@ -95,8 +95,10 @@ services:
     tty: true
     restart: unless-stopped
     image: ollama/ollama:${OLLAMA_DOCKER_TAG-latest}
+    # Expose Ollama API outside the container stack
     ports:
       - ${OLLAMA_WEBAPI_PORT-11434}:11434
+    # GPU support
     deploy:
       resources:
         reservations:
@@ -105,11 +107,10 @@ services:
               count: ${OLLAMA_GPU_COUNT-1}
               capabilities:
                 - gpu
+
   open-webui:
     build:
       context: .
-      args:
-        OLLAMA_BASE_URL: '/ollama'
       dockerfile: Dockerfile
     image: ghcr.io/open-webui/open-webui:${WEBUI_DOCKER_TAG-main}
     container_name: open-webui
