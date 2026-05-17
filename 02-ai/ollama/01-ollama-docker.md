@@ -171,3 +171,5 @@ sudo docker image prune -f
 
 ### **ollama open webui (chatapp)**
 ![](img/ollama-open-webui.png "ollama open webui")
+
+![](img/ollama-open-webui-vision.png "ollama open webui vision")
