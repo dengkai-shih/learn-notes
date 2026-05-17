@@ -1,4 +1,5 @@
-# 1. PowerShell 使用 if 語句搭配比較運算子進行字串比對。常用不區分大小寫的 -eq (等於)、-like (萬用字元比對)、-match (正規表示式) 或區分大小寫的 -ceq、-clike。左側為變數，右側為比對字串，如 if ($a -eq "test")。
+# 1. String Comparison
+PowerShell 使用 if 語句搭配比較運算子進行字串比對。常用不區分大小寫的 -eq (等於)、-like (萬用字元比對)、-match (正規表示式) 或區分大小寫的 -ceq、-clike。左側為變數，右側為比對字串，如 if ($a -eq "test")。
 ## 1-1. 常用字串比對運算子 (不區分大小寫)
 ### (1) 完全相等 (-eq)：
 ```powershell

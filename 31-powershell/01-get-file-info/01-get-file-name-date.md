@@ -53,7 +53,8 @@ Length # 檔案大小 (Bytes)
 CreationTime # 建立時間
 LastWriteTime # 上次修改時間
 ```
-# 3. 在 PowerShell 中，遍歷陣列（Array）主要有三種方式：傳統的 for 迴圈（使用索引）、更簡潔的 foreach 語句，以及管線 ForEach-Object。對於陣列操作，推薦使用 foreach 語句，因為它代碼更簡潔、易讀。
+# 3. PowerShell : for loop 
+在 PowerShell 中，遍歷陣列（Array）主要有三種方式：傳統的 for 迴圈（使用索引）、更簡潔的 foreach 語句，以及管線 ForEach-Object。對於陣列操作，推薦使用 foreach 語句，因為它代碼更簡潔、易讀。
 ## 3-1. 傳統 for 迴圈 (索引方式)
 ### 適用於需要使用索引（Index）來操作陣列，例如同時操作多個陣列或跳躍式讀取。
 ```powershell
@@ -90,7 +91,8 @@ for ($i = 0; $i -lt $data.Count; $i += 2) {
     Write-Host "跳號處理: $($data[$i])"
 }
 ```
-# 4. 在 PowerShell 中，檢查資料夾是否存在的最快方法是使用 Test-Path 命令。該命令若路徑存在會傳回 $true，否則傳回 $false。
+# 4. Check folder / file path 
+在 PowerShell 中，檢查資料夾是否存在的最快方法是使用 Test-Path 命令。該命令若路徑存在會傳回 $true，否則傳回 $false。
 ## 4-1. 基本檢查語法
 ### 使用 if 判斷式來執行動作：
 ```powershell
@@ -115,7 +117,8 @@ if (!(Test-Path -Path $folderPath)) {
 if (-not (Test-Path $path)) { ... } # 檢查不存在
 if (Test-Path $path) { ... }       # 檢查存在
 ```
-# 5. 在 PowerShell 中移動檔案或資料夾，主要使用 Move-Item 這個 Cmdlet。它可以將檔案從一個位置移至另一個位置，同時保留其屬性、內容和子專案。
+# 5. Move file
+在 PowerShell 中移動檔案或資料夾，主要使用 Move-Item 這個 Cmdlet。它可以將檔案從一個位置移至另一個位置，同時保留其屬性、內容和子專案。
 ## 基本移動檔案語法
 ```powershell
 Move-Item -Path "來源檔案路徑" -Destination "目標資料夾路徑"
