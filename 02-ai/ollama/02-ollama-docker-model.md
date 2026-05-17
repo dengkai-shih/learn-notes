@@ -34,7 +34,7 @@ docker exec -it ollama ollama pull gemma4:e2b
 docker exec -it ollama ollama pull gemma4:e4b
 ```
 
-### ["huihui_ai/granite4.1-abliterated"](https://ollama.com/huihui_ai/granite4.1-abliterated)
+### [![](img/granite4.1.png "huihui_ai/gemma-4-abliterated")"abliterated"](https://ollama.com/huihui_ai/granite4.1-abliterated)
 ```sh
 # "huihui_ai/granite4.1-abliterated" 3 billion Parameter Count (2.1GB)
 docker exec -it ollama ollama pull huihui_ai/granite4.1-abliterated:3b
@@ -43,13 +43,25 @@ docker exec -it ollama ollama pull huihui_ai/granite4.1-abliterated:3b
 docker exec -it ollama ollama pull huihui_ai/granite4.1-abliterated:8b
 ```
 
-### ["huihui_ai/gemma-4-abliterated"](https://ollama.com/huihui_ai/gemma-4-abliterated)
+### [![](img/gemma4.png "huihui_ai/gemma-4-abliterated")"abliterated"](https://ollama.com/huihui_ai/gemma-4-abliterated)
 ```sh
 # "huihui_ai/gemma-4-abliterated" Effective 2B (E2B) (7.2GB)
 docker exec -it ollama ollama pull huihui_ai/gemma-4-abliterated:e2b
 
 # "huihui_ai/gemma-4-abliterated" Effective 4B (E4B) (9.6GB)
 docker exec -it ollama ollama pull huihui_ai/gemma-4-abliterated:e4b
+```
+
+### [![](img/qwen3.5.png "huihui_ai/qwen3.5-abliterated")"abliterated"](https://ollama.com/huihui_ai/qwen3.5-abliterated)
+```sh
+# "huihui_ai/qwen3.5-abliterated" 2 billion Parameter Count (1.9GB)
+docker exec -it ollama ollama pull huihui_ai/qwen3.5-abliterated:2B
+
+# "huihui_ai/qwen3.5-abliterated" 4 billion Parameter Count (3.3GB)
+docker exec -it ollama ollama pull huihui_ai/qwen3.5-abliterated:4B
+
+# "huihui_ai/qwen3.5-abliterated" 9 billion Parameter Count (6.6GB)
+docker exec -it ollama ollama pull huihui_ai/qwen3.5-abliterated:9B
 ```
 
 ## (code)
@@ -111,4 +123,11 @@ You are a professional Chinese (zh-TW) to English (en) translator. Your goal is 
 Produce only the English translation, without any additional explanations or commentary. Please translate the following Chinese text into English:
 
 你好世界
+```
+
+## (vision)
+### [![](img/granite3.2-vision.png "granite3.2-vision-abliterated")"abliterated"](https://ollama.com/huihui_ai/granite3.2-vision-abliterated)
+```sh
+# "granite3.2-vision-abliterated model" 2 billion Parameter Count (2.4GB)
+docker exec -it ollama ollama pull huihui_ai/granite3.2-vision-abliterated:2b
 ```
