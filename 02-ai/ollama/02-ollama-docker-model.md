@@ -46,10 +46,10 @@ docker exec -it ollama ollama pull huihui_ai/granite4.1-abliterated:8b
 ### ["huihui_ai/gemma-4-abliterated"](https://ollama.com/huihui_ai/gemma-4-abliterated)
 ```sh
 # "huihui_ai/gemma-4-abliterated" Effective 2B (E2B) (7.2GB)
-docker exec -it ollama ollama pull huihui_ai/granite4.1-abliterated:3b
+docker exec -it ollama ollama pull huihui_ai/gemma-4-abliterated:e2b
 
 # "huihui_ai/gemma-4-abliterated" Effective 4B (E4B) (9.6GB)
-docker exec -it ollama ollama pull huihui_ai/granite4.1-abliterated:8b
+docker exec -it ollama ollama pull huihui_ai/gemma-4-abliterated:e4b
 ```
 
 ## (code)
