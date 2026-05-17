@@ -64,6 +64,15 @@ docker exec -it ollama ollama pull huihui_ai/qwen3.5-abliterated:4B
 docker exec -it ollama ollama pull huihui_ai/qwen3.5-abliterated:9B
 ```
 
+### [![](img/meta.png "huihui_ai/llama3.2-abliterate")"abliterated"](https://ollama.com/huihui_ai/llama3.2-abliterate)
+```sh
+# "huihui_ai/llama3.2-abliterate" 1 billion Parameter Count (955MB)
+docker exec -it ollama ollama pull huihui_ai/llama3.2-abliterate:1b
+
+# "huihui_ai/gllama3.2-abliterate" 3 billion Parameter Count (2.2GB)
+docker exec -it ollama ollama pull huihui_ai/llama3.2-abliterate:3b
+```
+
 ## (code)
 ### [![](img/meta.png "codellama model")](https://ollama.com/library/codellama)
 ```sh
