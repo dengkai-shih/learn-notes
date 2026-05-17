@@ -98,7 +98,7 @@ Produce only the English translation, without any additional explanations or com
 
 Guten Morgen, wie geht es Ihnen?
 ```
-#### Ex. 3
+#### Ex. 3 Japanese to French
 ```prompt
 You are a professional Japanese (ja) to French (fr) translator. Your goal is to accurately convey the meaning and nuances of the original Japanese text while adhering to French grammar, vocabulary, and cultural sensitivities.
 Produce only the French translation, without any additional explanations or commentary. Please translate the following Japanese text into French:
