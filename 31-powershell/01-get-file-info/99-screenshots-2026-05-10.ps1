@@ -1,5 +1,5 @@
 $org_root = "E:\98-temp\99-a54\01-local\galaxy-a71-5g-20240229\DCIM\Screenshots"
-$dest_root = "E:\98-temp\99-a54\03-backup\03-screenshots"
+$dest_root = "E:\98-temp\99-a54\03-media\03-screenshots"
 #$org_files = (Get-ChildItem $org_root | Select-Object -Property @{Name="FullPath"; Expression={$_.FullName}})
 #echo $org_files
 $org_files = (Get-ChildItem $org_root | Select-Object FullName)
