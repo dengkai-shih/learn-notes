@@ -1,16 +1,16 @@
 ## 1. pull model
-## 範例 [gemma](https://ollama.com/library/gemma4)
+## example : [gemma](https://ollama.com/library/gemma4)
 ```sh
 # pull 'gemma'
 docker exec -it ollama ollama pull gemma:7b
 ```
 ## 2. remove model
-## 範例 [gemma](https://ollama.com/library/gemma4)
+## example : [gemma](https://ollama.com/library/gemma4)
 ```sh
 # pull 'gemma'
 docker exec -it ollama ollama rm gemma:7b
 ```
-## + 參考資料 +
+## + reference +
 [Linux用docker-compose部署Open WebUI + Ollama語言模型網頁界面](https://ivonblog.com/posts/ollama-llm-docker/)
 
 [Ollama 官網](https://ollama.com/)
@@ -76,4 +76,39 @@ docker exec -it ollama ollama pull translategemma:4b
 
 # "translategemma model" 12 billion Parameter Count (8.1GB)
 docker exec -it ollama ollama pull translategemma:12b
+```
+#### Prompt Format
+```prompt
+You are a professional {SOURCE_LANG} ({SOURCE_CODE}) to {TARGET_LANG} ({TARGET_CODE}) translator. Your goal is to accurately convey the meaning and nuances of the original {SOURCE_LANG} text while adhering to {TARGET_LANG} grammar, vocabulary, and cultural sensitivities.
+Produce only the {TARGET_LANG} translation, without any additional explanations or commentary. Please translate the following {SOURCE_LANG} text into {TARGET_LANG}:
+
+{TEXT}
+```
+#### Ex. 1 English to Spanish
+```prompt
+You are a professional English (en) to Spanish (es) translator. Your goal is to accurately convey the meaning and nuances of the original English text while adhering to Spanish grammar, vocabulary, and cultural sensitivities.
+Produce only the Spanish translation, without any additional explanations or commentary. Please translate the following English text into Spanish:
+
+Hello, how are you?
+```
+#### Ex. 2 German to English
+```prompt
+You are a professional German (de) to English (en) translator. Your goal is to accurately convey the meaning and nuances of the original German text while adhering to English grammar, vocabulary, and cultural sensitivities.
+Produce only the English translation, without any additional explanations or commentary. Please translate the following German text into English:
+
+Guten Morgen, wie geht es Ihnen?
+```
+#### Ex. 3
+```prompt
+You are a professional Japanese (ja) to French (fr) translator. Your goal is to accurately convey the meaning and nuances of the original Japanese text while adhering to French grammar, vocabulary, and cultural sensitivities.
+Produce only the French translation, without any additional explanations or commentary. Please translate the following Japanese text into French:
+
+こんにちは、世界！
+```
+#### Ex. 4 Chinese to English
+```prompt
+You are a professional Chinese (zh-TW) to English (en) translator. Your goal is to accurately convey the meaning and nuances of the original Chinese text while adhering to English grammar, vocabulary, and cultural sensitivities.
+Produce only the English translation, without any additional explanations or commentary. Please translate the following Chinese text into English:
+
+你好世界
 ```

@@ -1,4 +1,4 @@
-# 使用docker部署Open WebUI + Ollama語言模型網頁界面[[參考資料]](https://ivonblog.com/posts/ollama-llm-docker/)
+# Deploying an Open WebUI + Ollama language model web interface using Docker[[reference]](https://ivonblog.com/posts/ollama-llm-docker/)
 ## 1. [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
 ### 1-1. Uninstall old versions
 ```sh
@@ -165,3 +165,9 @@ sudo docker compose up -d
 ```sh
 sudo docker image prune -f
 ```
+## + DEMO +
+### **ollama in Docker Desktop state**
+![](img/docker-desktop-windows.png "ollama in Docker Desktop state")
+
+### **ollama open webui (chatapp)**
+![](img/ollama-open-webui.png "ollama open webui")
