@@ -57,12 +57,12 @@ sudo apt install gnome-shell-extension-cpufreq
 ### 
 如果需要更進階的功耗牆(TDP)限制(例如將 45W 功耗壓到 25W)，可以參考 GitHub 上的開源工具 [RyzenAdj](https://github.com/flygoat/ryzenadj)。
 ##### 參考資料：
-[1] [Managing CPU frequency for AMD on Ubuntu 22.04](https://smalldatum.blogspot.com/2024/10/managing-cpu-frequency-for-amd-on.html)
-[2] [關掉 AMD Ryzen 7 4800H 的 CPU 增強功能](https://www.reddit.com/r/Ubuntu/comments/13elvor/is_it_possible_to_disable_cpu_boost_for_amd_ryzen/?tl=zh-hant)
-[3] [Turning off processor boost](https://bbs.archlinux.org/viewtopic.php?id=291561)
-[4] [Is there a way to set amd_pstate = passive permanently?](https://www.reddit.com/r/NobaraProject/comments/1b0fgvm/is_there_a_way_to_set_amd_pstate_passive/)
-[5] [CPU frequency scaling](https://wiki.archlinux.org/title/CPU_frequency_scaling)
-[6] [使用cpufrequtils查看调整cpu频率及模式](https://blog.csdn.net/qq_33921750/article/details/134131598)
-[7] [How to Configure CPU Governor and Power Management on Ubuntu](https://oneuptime.com/blog/post/2026-01-15-configure-cpu-governor-power-management-ubuntu/view)
-[8] [Ubuntu下利用RyzenAdj优化AMD Ryzen移动处理器性能与散热（以R9000k 2021 5900hx 3080为例）](https://blog.csdn.net/weixin_26899659/article/details/160166719)
-[9] [Adjust power management settings for Ryzen Mobile Processors.](https://github.com/flygoat/ryzenadj)
+[1] [Managing CPU frequency for AMD on Ubuntu 22.04](https://smalldatum.blogspot.com/2024/10/managing-cpu-frequency-for-amd-on.html)<br>
+[2] [關掉 AMD Ryzen 7 4800H 的 CPU 增強功能](https://www.reddit.com/r/Ubuntu/comments/13elvor/is_it_possible_to_disable_cpu_boost_for_amd_ryzen/?tl=zh-hant)<br>
+[3] [Turning off processor boost](https://bbs.archlinux.org/viewtopic.php?id=291561)<br>
+[4] [Is there a way to set amd_pstate = passive permanently?](https://www.reddit.com/r/NobaraProject/comments/1b0fgvm/is_there_a_way_to_set_amd_pstate_passive/)<br>
+[5] [CPU frequency scaling](https://wiki.archlinux.org/title/CPU_frequency_scaling)<br>
+[6] [使用cpufrequtils查看调整cpu频率及模式](https://blog.csdn.net/qq_33921750/article/details/134131598)<br>
+[7] [How to Configure CPU Governor and Power Management on Ubuntu](https://oneuptime.com/blog/post/2026-01-15-configure-cpu-governor-power-management-ubuntu/view)<br>
+[8] [Ubuntu下利用RyzenAdj优化AMD Ryzen移动处理器性能与散热（以R9000k 2021 5900hx 3080为例）](https://blog.csdn.net/weixin_26899659/article/details/160166719)<br>
+[9] [Adjust power management settings for Ryzen Mobile Processors.](https://github.com/flygoat/ryzenadj)<br>
