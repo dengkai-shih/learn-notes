@@ -34,7 +34,16 @@ docker exec -it ollama ollama pull gemma4:e2b
 docker exec -it ollama ollama pull gemma4:e4b
 ```
 
-### [![](img/granite4.1.png "huihui_ai/gemma-4-abliterated")"abliterated"](https://ollama.com/huihui_ai/granite4.1-abliterated)
+### [![](img/granite4.1.png "granite4.1")](https://ollama.com/library/granite4.1)
+```sh
+# "granite4.1" 3 billion Parameter Count (2.1GB)
+docker exec -it ollama ollama pull granite4.1:3b
+
+# "granite4.1" 4 billion Parameter Count (5.3GB)
+docker exec -it ollama ollama pull granite4.1:8b
+```
+
+### [![](img/granite4.1.png "huihui_ai/granite4.1-abliterated")"abliterated"](https://ollama.com/huihui_ai/granite4.1-abliterated)
 ```sh
 # "huihui_ai/granite4.1-abliterated" 3 billion Parameter Count (2.1GB)
 docker exec -it ollama ollama pull huihui_ai/granite4.1-abliterated:3b
