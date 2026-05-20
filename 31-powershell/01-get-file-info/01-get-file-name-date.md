@@ -148,7 +148,24 @@ Move-Item -Path "C:\test\old_name.txt" -Destination "C:\new_folder\new_name.txt"
 ```powershell
 Move-Item -Path "C:\test\file.txt" -Destination "D:\backup\" -Force
 ```
-## 5-6. 重要提示
+## 5-6. 在 PowerShell 中使用 ```Try``` / ```Catch``` 捕捉錯誤訊息
+### 基本用法
+例外事件的型別有很多種，例如 ```System.NotSupportedException```、```System.IO.DirectoryNotFoundException``` 等很多種，如果要針對某一已知的例外類型做出對應的處理方式，可以參考下面的寫法：
+```powershell
+try {
+    # 主要程式邏輯
+}
+catch [System.NotSupportedException] {
+    Write-Output "不支援 : "+$Error[0]
+}
+catch [System.IO.DirectoryNotFoundException] {
+    Write-Output "找不到資料夾 : "+$Error[0]
+}
+catch {
+    Write-Output "通用的例外處理 : "+$Error[0]
+}
+```
+## 5-7. 重要提示
 ### (1) 相同路徑不能移動：```Move-Item``` 無法將專案移至具有相同名稱且已存在的位置。
 ### (2) 跨磁碟機：```Move-Item``` 支援在不同的磁碟機之間移動檔案。
 ### (3) 別名：可以使用 ```move``` 或 ```mv``` 作為 ```Move-Item``` 的簡寫。

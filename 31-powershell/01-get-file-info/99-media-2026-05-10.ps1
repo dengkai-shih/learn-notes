@@ -1,4 +1,4 @@
-$org_root = "E:\98-temp\99-a54\01-local\galaxy-a71-5g-20240229\DCIM\Videocaptures"
+$org_root = "E:\71-presentation\99-gunini\2022\04\04\01-photo"
 $dest_root = "E:\98-temp\99-a54\03-media"
 $dest_media_root = ""
 #$org_files = (Get-ChildItem $org_root | Select-Object -Property @{Name="FullPath"; Expression={$_.FullName}})
