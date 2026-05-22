@@ -25,7 +25,24 @@
 | ```git remote remove <遠端倉庫別名>``` | 要移除 Git 的遠端倉庫連結(通常名為 ```origin```)，請使用指令：```git remote remove origin```。 |  |
 | ```git push -u (origin) (main)``` | 指令 ```git push -u origin main``` 的主要作用是**將本地的 ```main``` 分支推送到名為 origin 的遠端數據庫，並同時建立兩者之間的追蹤(Upstream)關係**。 | **拆解指令含義**<br>```git push```：將本地的提交(Commits)上傳並合併到遠端數據庫。<br>**```-u``` (或 --set-upstream)**：最關鍵的參數。它負責建立本地分支與遠端分支的「追蹤連結」。設定成功後，未來你在這個分支下只需要輸入 ```git push``` 或 ```git pull```，Git 就會自動知道要與遠端的哪個分支進行同步，不需要再重複輸入遠端與分支名稱。<br>```origin```：遠端數據庫的預設代稱(例如存在 GitHub、GitLab 或 Bitbucket 上的專案位置)。<br>```main```：你要推送的本地分支名稱。 |
 
+## 4. 基本版更 ( pull / push / add / commit / status )
+| Git 指令 | 指令說明 | 註記 |
+| :--- | :--- | :--- |
+| ```git status``` |  是 ```Git``` 中最核心的指令之一。它主要用來查看目前 ```Git``` 倉庫的狀態，幫助你了解目前目錄中哪些檔案被修改了、哪些檔案已經加入暫存區```(Staged)```、以及哪些檔案尚未被 ```Git``` 追蹤。 |  |
+| ```git add [files]``` | ```git add``` 指令的作用是將工作目錄中被修改或新建立的檔案，提交到「暫存區```(Staging Area)```/ 索引區```(Index)```」。這是 ```Git``` 版控流程中不可或缺的步驟，代表您已經確認過這些程式碼或檔案的變更，並「準備好」要在下一次執行 ```git commit``` 時，將它們正式打包成一個歷史版本快照。 | (1) **新增單一檔案**<br>```git add index.html```<br>(2) **新增多個檔案**：在 ```git add``` 後方以空白分隔多個檔案名稱，即可一次加入。<br>```git add file1.txt file2.css file3.js```<br>(3) **新增整個資料夾**：指定目錄名稱，將該目錄下所有的檔案與子目錄變更全部加入。<br>```git add .``` |
+| ```git add .```  | **新增「所有」變更**：```.``` 代表目前路徑。此指令會將當前目錄及所有子目錄下，所有新增、修改、刪除的檔案一次全部抓進暫存區。 |  |
+| ```git commit -m [message]``` | ```Git``` 版本控制系統中用來將暫存區(Staging Area)的檔案更動正式提交到本地儲存庫(Repository)，並同時附加一段簡短說明的指令。 |  |
+| ```git pull [origin] [main / branch]``` | ```git pull``` 指令用於從遠端儲儲庫下載最新的程式碼，並立即與你本地的當前分支進行合併。<br>核心為：```git pull = git fetch (下載變更) + git merge (合併分支)```。 | (1) **拉取預設遠端分支**：直接將目前分支所追蹤的遠端分支內容拉取並合併進來。<br>```git pull```<br>(2) **指定遠端主機與分支**：明確指定要從哪一個遠端主機(如 origin)的哪一個分支(如 main)拉取資料。<br>```git pull origin main```<br>(3) **使用 Rebase 機制合併**：預設的 ```git pull``` 會使用 ```merge``` 產生一個合併的 Commit 節點。使用 ```--rebase``` 參數可以讓本地未上傳的 ```Commit``` 「重基」在遠端最新的 Commit 之上，維持一條乾淨、線性的歷史紀錄。<br>```git pull --rebase origin main``` |
+| ```git pull --rebase [remote] [main / branch]``` | **使用 Rebase 機制合併**：預設的 ```git pull``` 會使用 ```merge``` 產生一個合併的 Commit 節點。使用 ```--rebase``` 參數可以讓本地未上傳的 ```Commit``` 「重基」在遠端最新的 Commit 之上，維持一條乾淨、線性的歷史紀錄。<br>```git pull --rebase origin main``` |  |
+| ```git push [remote] [main / branch]``` | 用來將本地端的 Git 提交(Commits)推送到遠端伺服器(如 GitHub、GitLab)的指令。<br>**基本結構如下：**<br>```git push <遠端數據庫名稱> <本地分支名稱>``` | (1) **首次推送新分支**<br>當你在本地建立了新分支，遠端還沒有這個分支時，需要建立追蹤關係：<br>```git push -u origin main```<br>(2) **後續常規推送**<br>已經設定過追蹤關係後，直接輸入：<br>```git push```<br>(3) **推送所有分支**<br>如果你想一次將本地所有分支都推送到遠端：<br>```git push --all origin```<br>(4) **強制推送（危險操作）**<br>當你修改了歷史 Commit（例如使用 ```git rebase``` 或 ```git commit --amend```）導致本地與遠端衝突，但你確定要以本地為主時：<br>```git push -f origin main``` |
+| ```git push -u [remote] [main / branch]``` | **首次推送新分支**<br>當你在本地建立了新分支，遠端還沒有這個分支時，需要建立追蹤關係：<br>```git push -u origin main``` |  |
+| ```git restore --staged [file]``` | 這個指令的核心作用是將檔案移出暫存區(Staging Area)，也就是取消剛才的 ```git add``` 操作，但會完整保留你在檔案中寫好的修改內容。 | (1) **取消暫存單一檔案**<br>```git restore --staged <檔案名稱>```<br>(2) **取消暫存所有檔案**<br>```git restore --staged .``` |
+| `````` |  |  |
 
 ## + 參考資料 +
 #### 1. ["Git &rarr; Learn &rarr; Book (指令手冊)"](https://git-scm.com/book/zh-tw/v2/%e9%96%8b%e5%a7%8b-%e9%97%9c%e6%96%bc%e7%89%88%e6%9c%ac%e6%8e%a7%e5%88%b6)
 #### 2. [Git 常用指令表 : https://ithelp.ithome.com.tw/m/articles/10241407](https://ithelp.ithome.com.tw/m/articles/10241407)
+
+| Git 指令 | 指令說明 | 註記 |
+| :--- | :--- | :--- |
+| `````` |  |  |
