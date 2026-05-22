@@ -9,12 +9,23 @@ sudo nano /etc/systemd/system/myscript.service
 將以下內容貼入檔案中，請務必將 ```/path/to/your_script.sh``` 替換為您 ```.sh``` 檔案的實際絕對路徑：
 ```ini
 [Unit]
+# 服務名稱
 Description=My Custom Startup Script
-After=network.target
+
+# 設定服務啟動的先後相依姓，例如在網路啟動之後：
+# After=network.target
 
 [Service]
-ExecStart=/bin/bash /path/to/your_script.sh
-Restart=always
+# 行程類型
+Type=simple
+
+# 啟動服務指令
+ExecStart=/path/to/your_script.sh
+
+# 服務終止時自動重新啟動
+# Restart=always
+
+# 執行服務的使用者（名稱或 ID 皆可）
 User=root
 
 [Install]
@@ -32,6 +43,81 @@ sudo systemctl start myscript.service
 若要確認腳本是否正常執行，可檢查該服務的狀態：
 ```sh
 sudo systemctl status myscript.service
+```
+### Systemd 服務單位設定檔範本
+以下是一個比較詳細的 Systemd 服務單位設定檔範本，在撰寫自訂服務的設定檔時，可以先複製這份設定再接著修改：
+```ini
+[Unit]
+# 服務名稱
+Description=Your Server
+
+# 服務相關文件
+# Documentation=https://example.com
+# Documentation=man:nginx(8)
+
+# 設定服務啟動的先後相依姓，例如在網路啟動之後：
+# After=network.target
+
+[Service]
+# 行程類型
+Type=simple
+
+# 啟動服務指令
+ExecStart=/opt/your_command
+
+# 服務行程 PID（通常配合 forking 的服務使用）
+# PIDFile=/run/your_server.pid
+
+# 啟動服務前，執行的指令
+# ExecStartPre=/opt/your_command
+
+# 啟動服務後，執行的指令
+# ExecStartPost=/opt/your_command
+
+# 停止服務指令
+# ExecStop=/opt/your_command
+
+# 停止服務後，執行的指令
+# ExecStopPost=/opt/your_command
+
+# 重新載入服務指令
+# ExecReload=/opt/your_command
+
+# 服務終止時自動重新啟動
+Restart=always
+
+# 重新啟動時間格時間（預設為 100ms）
+# RestartSec=3s
+
+# 啟動服務逾時秒數
+# TimeoutStartSec=3s
+
+# 停止服務逾時秒數
+# TimeoutStopSec=3s
+
+# 執行時的工作目錄
+# WorkingDirectory=/opt/your_folder
+
+# 執行服務的使用者（名稱或 ID 皆可）
+# User=myuser
+
+# 執行服務的群組（名稱或 ID 皆可）
+# User=mygroup
+
+# 環境變數設定
+# Environment="VAR1=word1 word2" VAR2=word3 "VAR3=$word 5 6"
+
+# 服務輸出訊息導向設定
+# StandardOutput=syslog
+
+# 服務錯誤訊息導向設定
+# StandardError=syslog
+
+# 設定服務在 Syslog 中的名稱
+# SyslogIdentifier=your-server
+
+[Install]
+WantedBy=multi-user.target
 ```
 ## 💡 實用技巧：簡單的 ```@reboot``` 方法
 如果您只需要最簡單的背景執行，且不需要複雜的管理，也可以使用內建的排程工具 ```cron```：<br>
