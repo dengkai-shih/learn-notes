@@ -129,3 +129,4 @@ WantedBy=multi-user.target
 [2] [使用 Systemd 開機自動執行腳本](cjkuo.net/systemd-run-script-on-startup/)<br>
 [3] [嘗試用 crontab 在開機時啟動 Mod 版 Minecraft 伺服器的 Shell Script](https://www.reddit.com/r/Ubuntu/comments/15nymi0/attempting_to_start_modded_minecraft_server_shell/?tl=zh-hant)<br>
 [4] [開機自動執行指定程式](https://kejyuntw.gitbooks.io/ubuntu-learning-notes/content/system/system-boot-auto-execute.html)<br>
+[5] [Linux 建立自訂 Systemd 服務教學與範例](https://blog.gtwang.org/linux/linux-create-systemd-service-unit-for-python-echo-server-tutorial-examples/)<br>
