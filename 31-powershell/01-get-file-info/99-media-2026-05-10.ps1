@@ -1,4 +1,4 @@
-$org_root = "E:\71-presentation\99-gunini\2022\04\04\01-photo"
+$org_root = "G:\99-offical\x\2021-11-21\mu-ying\LINE_MOVIE\2020\07\26"
 $dest_root = "E:\98-temp\99-a54\03-media"
 $dest_media_root = ""
 #$org_files = (Get-ChildItem $org_root | Select-Object -Property @{Name="FullPath"; Expression={$_.FullName}})
