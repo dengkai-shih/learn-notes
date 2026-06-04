@@ -1,10 +1,43 @@
-### 安裝 OpenClaw
+<h3>安裝 OpenClaw 服務 <span style="font-size: 70%;"><a href="https://openclaw.com.tw/" target="_blank">[1]</a></span></h3>
+
 #### 環境需求
 <ol>
 <li>Node.js 24 或 22.19 以上<br><span style="font-size: 80%;">安裝腳本會自動偵測並安裝對應版本。</sapn></li>
 <li>AI 模型 API Key<br><span style="font-size: 80%;">OpenAI、Claude、Gemini API Key / Ollama 本地模型。</sapn></li>
 <li>通訊平台帳號<br><span style="font-size: 80%;">準備一個 Telegram / WhatsApp / Line 帳號用於串接。</sapn></li>
 </ol>
+
+<p style="font-size: 80%;"><b>在 Ubuntu 上安裝 Homebrew 工具 <span style="font-size: 70%;"><a href="https://linuxcapable.com/how-to-install-homebrew-on-ubuntu-linux/" target="_blank">[2]</a></b></p>
+<p style="font-size: 80%;"><b>1. 更新 Ubuntu 與前置作業</b></li></p>
+
+```sh
+# 更新 Ubuntu
+sudo apt update
+
+# 安裝必備軟體
+sudo apt install -y build-essential procps curl file git
+```
+
+<p style="font-size: 80%;"><b>2. 執行 Homebrew 安裝程式</b></li></p>
+
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+<p style="font-size: 80%;"><b>3. 將 Homebrew 加入系統的 PATH 環境變數。</b></li></p>
+
+```sh
+BREW_SHELLENV='eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"'
+grep -qxF "$BREW_SHELLENV" ~/.bashrc || printf '%s\n' "$BREW_SHELLENV" >> ~/.bashrc
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+```
+
+<p style="font-size: 80%;"><b>4. 驗證 Homebrew 安裝。</b></li></p>
+
+```sh
+brew --version
+brew doctor
+```
 
 #### 安裝 OpenClaw
 <p><b>方法一：一鍵安裝腳本</b><br>
@@ -69,7 +102,7 @@ openclaw onboard --install-daemon
 #### + reference +
 <ol>
 <li><a href="https://openclaw.com.tw/" target="_blank">openclaw-TW</a></li>
-<li><a href="" target="_blank"></a></li>
+<li><a href="https://linuxcapable.com/how-to-install-homebrew-on-ubuntu-linux/" target="_blank">How to Install Homebrew on Ubuntu 26.04, 24.04 and 22.04</a></li>
 <li><a href="" target="_blank"></a></li>
 <li><a href="" target="_blank"></a></li>
 <li><a href="" target="_blank"></a></li>
