@@ -1,5 +1,5 @@
-# 安裝遠端連線 xrdp [install xrdp desktop remote](https://medium.com/itversity/how-to-set-up-rdp-on-ubuntu-24-04-for-remote-access-b008411727b7)
-## 1. 更新系統套件
+### 安裝遠端連線 xrdp [install xrdp desktop remote](https://medium.com/itversity/how-to-set-up-rdp-on-ubuntu-24-04-for-remote-access-b008411727b7)
+#### 1. 更新系統套件
 ```sh
 sudo apt update && sudo apt upgrade
 ```
@@ -134,7 +134,7 @@ Continue? [Y/n] Y
 執行 hicolor-icon-theme (0.18-2build1) 的觸發程式……
 執行 gnome-menus (3.38.1-1ubuntu1) 的觸發程式……
 ```
-## 2. 檢查 GUI 安裝的狀態
+#### 2. 檢查 GUI 安裝的狀態
 ```sh
 sudo apt list ubuntu-gnome-desktop
 ```
@@ -142,12 +142,12 @@ sudo apt list ubuntu-gnome-desktop
 root@31-ub-26-dev:/home/dengkai# sudo apt list ubuntu-gnome-desktop
 ubuntu-gnome-desktop/resolute 0.106 amd64
 ```
-### 2.1 如未安裝 GUI ，建議安裝 GNOME Desktop
+##### 2.1 如未安裝 GUI ，建議安裝 GNOME Desktop
 ```sh
 sudo apt install ubuntu-gnome-desktop
 ```
-## 3. 安裝與設定 xrdp 相關套件
-### 3.1 安裝 xrdp 套件
+#### 3. 安裝與設定 xrdp 相關套件
+##### 3.1 安裝 xrdp 套件
 ```sh
 sudo apt install xrdp
 ```
@@ -325,23 +325,85 @@ Created symlink '/etc/systemd/system/multi-user.target.wants/xrdp.service' → '
 執行 man-db (2.13.1-1build1) 的觸發程式……
 執行 fontconfig (2.17.1-3ubuntu1) 的觸發程式……
 ```
-### 3.2 將 xrdp 使用者加入 ssl-cert 群組
+##### 3.2 將 xrdp 使用者加入 ssl-cert 群組
 ```sh
 sudo adduser xrdp ssl-cert
 ```
 ```cmd
 root@31-ub-26-dev:/home/dengkai# sudo adduser xrdp ssl-cert
 ```
-## 4. 設定防火牆權限
+#### 4. 設定防火牆權限
 確保伺服器防火牆允許 XRDP 可使用的 3389 連接埠。
 ```sh
 sudo ufw allow 3389/tcp
+sudo ufw allow 3390/tcp
 sudo ufw reload
 ```
-## 5. 啟動 xrdp 服務
+#### 5. 啟動 xrdp 服務
 ```sh
 sudo systemctl enable xrdp
 sudo systemctl restart xrdp
 sudo systemctl status xrdp
 sudo echo gnome-session > ~/.xsession
 ```
+#### ubuntu 26.04 xrdp not working
+XRDP does not work out-of-the-box on Ubuntu 26.04 because the distribution transitioned to Wayland as the exclusive display server, dropping Xorg entirely. XRDP requires an X11 session to render. To fix this, you must **```install Xorg, disable Wayland in GDM, and configure XRDP to use X11```.** <a href="https://www.reddit.com/r/Ubuntu/comments/1snyiqd/rdp_problem_with_fresh_2604_install/" target="_blank">[2]</a><a href="https://linuxconfig.org/how-to-disable-wayland-on-ubuntu-26-04" target="_blank">[3]</a>
+#### Step-by-Step Fix
+Follow these steps to restore XRDP functionality on Ubuntu 26.04:
+##### 1. Install Xorg and a Compatible Desktop Manager
+Since Ubuntu 26.04 ships with Wayland by default, you must install the base Xorg packages so a graphical session can be spawned. <a href="https://linuxconfig.org/how-to-install-x11-on-ubuntu-26-04" target="_blank">[4]</a>
+```sh
+sudo apt update
+sudo apt install xorg xserver-xorg-input-all -y
+```
+##### 2. Disable Wayland in GDM
+Edit your GDM (GNOME Display Manager) configuration file to force X11 usage: <a href="https://www.reddit.com/r/Ubuntu/comments/1snyiqd/rdp_problem_with_fresh_2604_install/" target="_blank">[2]</a><a href="https://forums.developer.nvidia.com/t/remote-login-ubuntu-bundle-remote-desktop-is-not-working/365599" target="_blank">[5]</a>
+```sh
+sudo bash -c 'cat <<EOF >> /etc/gdm3/custom.conf
+```
+```ini
+# /etc/gdm3/custom.conf
+[daemon]
+WaylandEnable=false
+```
+<p style="font-size: 80%; color: red; font-style: italic;">Note: If WaylandEnable=false already exists in the file, simply uncomment it by removing the # in front of it.</p>
+
+##### 3. Stop GNOME Remote Desktop
+The built-in Ubuntu Remote Desktop service often binds to RDP ports, causing conflicts. Stop and disable it: <a href="https://forums.developer.nvidia.com/t/remote-login-ubuntu-bundle-remote-desktop-is-not-working/365599" target="_blank">[5]</a><a href="https://alexhost.com/faq/how-to-connect-to-ubuntu-from-windows-using-rdp/" target="_blank">[6]</a>
+```sh
+sudo systemctl --user stop gnome-remote-desktop.service
+sudo systemctl --user disable gnome-remote-desktop.service
+```
+##### 4. Reinstall and Configure XRDP
+Install the necessary XRDP packages and instruct the XRDP session script to use X11. <a href="https://forums.developer.nvidia.com/t/remote-login-ubuntu-bundle-remote-desktop-is-not-working/365599" target="_blank">[5]</a>
+```sh
+sudo apt install xrdp xorgxrdp -y
+echo "export XDG_SESSION_TYPE=x11" | sudo tee -a /etc/xrdp/startwm.sh
+```
+Also, make sure the xrdp user has permissions for security certificates <a href="https://forums.developer.nvidia.com/t/remote-login-ubuntu-bundle-remote-desktop-is-not-working/365599" target="_blank">[5]</a>
+```sh
+sudo usermod -a -G ssl-cert xrdp
+```
+##### 5. Restart and Verify
+Restart the GDM and XRDP services and reboot your system:  <a href="https://www.reddit.com/r/Ubuntu/comments/1snyiqd/rdp_problem_with_fresh_2604_install/" target="_blank">[2]</a><a href="https://forums.developer.nvidia.com/t/remote-login-ubuntu-bundle-remote-desktop-is-not-working/365599" target="_blank">[5]</a>
+```sh
+sudo systemctl restart gdm
+sudo systemctl enable xrdp
+sudo systemctl restart xrdp
+sudo reboot
+```
+##### 6. Connect from Your Client
+When logging in from your remote Windows/macOS client, make sure your username is typed cleanly without prefixing domain names, and set your display Color depth to High Color (16-bit) or higher to avoid backend X-server timeout errors.<a href="https://askubuntu.com/questions/797973/error-problem-connecting-windows-10-rdp-into-xrdp" target="_blank">[7]</a><br>
+For a visual walkthrough of the GDM and Wayland configurations required to make XRDP work on modern Ubuntu versions:
+#### + reference +
+<ol>
+<li><a href="https://medium.com/itversity/how-to-set-up-rdp-on-ubuntu-24-04-for-remote-access-b008411727b7" target="_blank">How to Set Up RDP on Ubuntu 24.04 for Remote Access</a></li>
+<li><a href="https://www.reddit.com/r/Ubuntu/comments/1snyiqd/rdp_problem_with_fresh_2604_install/" target="_blank">RDP problem with fresh 26.04 install</a></li>
+<li><a href="https://linuxconfig.org/how-to-disable-wayland-on-ubuntu-26-04" target="_blank">How to Disable Wayland on Ubuntu 26.04</a></li>
+<li><a href="https://linuxconfig.org/how-to-install-x11-on-ubuntu-26-04" target="_blank">How to Install X11 on Ubuntu 26.04</a></li>
+<li><a href="https://forums.developer.nvidia.com/t/remote-login-ubuntu-bundle-remote-desktop-is-not-working/365599" target="_blank">“Remote Login” (Ubuntu bundle Remote Desktop) is not working</a></li>
+<li><a href="https://alexhost.com/faq/how-to-connect-to-ubuntu-from-windows-using-rdp/" target="_blank">How to Connect to Ubuntu from Windows Using RDP</a></li>
+<li><a href="https://askubuntu.com/questions/797973/error-problem-connecting-windows-10-rdp-into-xrdp" target="_blank">Error/problem connecting (Windows 10 RDP into XRDP)</a></li>
+<li><a href="" target="_blank"></a></li>
+
+</ol>

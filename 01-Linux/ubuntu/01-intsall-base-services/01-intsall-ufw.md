@@ -178,6 +178,7 @@ root@31-ub-26-dev:/home/dengkai# sudo ufw status
 ```sh
 sudo ufw allow from 192.168.1.0/24 to any port 22
 sudo ufw allow from 192.168.1.0/24 to any port 3389
+sudo ufw allow from 192.168.1.0/24 to any port 3390
 sudo ufw allow from 192.168.1.0/24 to any port 9090
 ```
 ```console
