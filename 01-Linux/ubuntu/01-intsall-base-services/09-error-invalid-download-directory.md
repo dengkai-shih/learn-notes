@@ -7,7 +7,7 @@ sudo snap connect jdownloader2:removable-media
 ```
 ```sh
 # qbittorrent
-sudo snap connect qbittorrent:removable-media
+sudo snap connect qBittorrent:removable-media
 ```
 #### + reference +
 <ol>
