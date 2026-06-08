@@ -11,9 +11,10 @@ sudo snap connect qbittorrent:removable-media
 ```
 #### + reference +
 <ol>
-<li><a href="https://www.google.com/search?q=ubuntu+26.04+jdownloader2+usb+disk+error&oq=ubuntu+26.04+jdownloader2+usb+disk+error&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQABjvBTIHCAIQABjvBTIHCAMQABjvBTIHCAQQABjvBTIHCAUQABjvBdIBCTQxMzc3ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8" target="_blank">google search</a></li>
+<li><a href="https://www.google.com/search?q=ubuntu+26.04+jdownloader2+usb+disk+error&oq=ubuntu+26.04+jdownloader2+usb+disk+error&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQABjvBTIHCAIQABjvBTIHCAMQABjvBTIHCAQQABjvBTIHCAUQABjvBdIBCTQxMzc3ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8" target="_blank">google search : jdownloader2</a></li>
 <li><a href="https://support.jdownloader.org/en/knowledgebase/article/error-invalid-download-directory" target="_blank">Error Invalid Download Directory</a></li>
-<li><a href="" target="_blank"></a></li>
+# qbittorrent
+<li><a href="https://www.google.com/search?q=ubuntu+26.04+qbittorrent+usb+disk+error&rlz=1C1CHBF_zh-TWTW1056TW1056&oq=ubuntu+26.04+qbittorrent+usb+disk+error&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQABjvBTIHCAIQABjvBTIHCAMQABjvBTIHCAQQABjvBTIHCAUQABjvBdIBCjE1MDMxajBqMTWoAgiwAgHxBUFuTwUmvZir&sourceid=chrome&ie=UTF-8" target="_blank">google search : </a></li>
 <li><a href="" target="_blank"></a></li>
 <li><a href="" target="_blank"></a></li>
 <li><a href="" target="_blank"></a></li>
