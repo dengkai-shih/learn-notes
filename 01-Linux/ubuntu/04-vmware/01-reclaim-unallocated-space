@@ -23,6 +23,7 @@ sudo vmware-toolbox-cmd disk shrinkonly
 ```
 #### + reference +
 <ol>
+<li><a href="https://www.google.com/search?q=vm+workstation+clean+disk+ubuntu&rlz=1C1CHBF_zh-TWTW1056TW1056&oq=vm+workstation+clean+disk+ub&gs_lcrp=EgZjaHJvbWUqCQgBECEYChigATIGCAAQRRg5MgkIARAhGAoYoAHSAQkxNDg0M2owajeoAgCwAgA&sourceid=chrome&ie=UTF-8" target="_blank">google search</a></li>
 <li><a href="https://wordpress.cine.idv.tw/index.php/2018/09/16/vmware-workstation-ubuntu-virtual-machine-shrink-disk/" target="_blank">縮小 Ubuntu VMware 虛擬機器占用的實體硬碟空間</a></li>
 <li><a href="https://www.reddit.com/r/vmware/comments/xa13zx/reclaim_unallocated_space_from_guest_os_vmware/" target="_blank">Reclaim unallocated space from Guest OS - vmware workstation 14.0</a></li>
 <li><a href="https://askubuntu.com/questions/5980/how-do-i-free-up-disk-space" target="_blank">How do I free up disk space?</a></li>
