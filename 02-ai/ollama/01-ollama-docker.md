@@ -72,6 +72,7 @@ sudo systemctl restart docker
 git clone https://github.com/open-webui/open-webui.git
 cd open-webui
 cp .env.example .env
+docker network create web-app-bridge
 ```
 ## 4. Use docker-compose to start the Open WebUI container service
 ```sh
@@ -130,6 +131,10 @@ services:
 volumes:
   ollama: {}
   open-webui: {}
+
+networks:
+  web_app_bridge:
+    driver: bridge
 ```
 ## 5. get LLM
 ```sh
