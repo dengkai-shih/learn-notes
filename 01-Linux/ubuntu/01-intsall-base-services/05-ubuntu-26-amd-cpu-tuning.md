@@ -56,6 +56,72 @@ sudo apt install gnome-shell-extension-cpufreq
 這是一款針對筆記型電腦設計的電源管理軟體，提供「節能(Energy Saving)」模式，會自動幫您的 Ryzen 4800H 進行降速與節電優化。
 ### 
 如果需要更進階的功耗牆(TDP)限制(例如將 45W 功耗壓到 25W)，可以參考 GitHub 上的開源工具 [RyzenAdj](https://github.com/flygoat/ryzenadj)。
+### note.
+```sh
+sudo cpufreq-set -c 0 -d 1.4GHz -u 2.9GHz
+sudo cpufreq-set -c 1 -d 1.4GHz -u 2.9GHz
+sudo cpufreq-set -c 2 -d 1.4GHz -u 2.9GHz
+sudo cpufreq-set -c 3 -d 1.4GHz -u 2.9GHz
+sudo cpufreq-set -c 4 -d 1.4GHz -u 2.9GHz
+sudo cpufreq-set -c 5 -d 1.4GHz -u 2.9GHz
+sudo cpufreq-set -c 6 -d 1.4GHz -u 2.9GHz
+sudo cpufreq-set -c 7 -d 1.4GHz -u 2.9GHz
+sudo cpufreq-set -c 8 -d 1.4GHz -u 2.9GHz
+sudo cpufreq-set -c 9 -d 1.4GHz -u 2.9GHz
+sudo cpufreq-set -c 10 -d 1.4GHz -u 2.9GHz
+sudo cpufreq-set -c 11 -d 1.4GHz -u 2.9GHz
+sudo cpufreq-set -c 12 -d 1.4GHz -u 2.9GHz
+sudo cpufreq-set -c 13 -d 1.4GHz -u 2.9GHz
+sudo cpufreq-set -c 14 -d 1.4GHz -u 2.9GHz
+sudo cpufreq-set -c 15 -d 1.4GHz -u 2.9GHz
+```
+```sh
+cpupower frequency-info -l
+sudo cpupower frequency-set --min 1400000
+sudo cpupower frequency-set --max 2900000
+```
+### note.
+```sh
+sudo cpufreq-set -c 0 -d 400MHz -u 1.0GHz
+sudo cpufreq-set -c 1 -d 400MHz -u 1.0GHz
+sudo cpufreq-set -c 2 -d 400MHz -u 1.0GHz
+sudo cpufreq-set -c 3 -d 400MHz -u 1.0GHz
+sudo cpufreq-set -c 4 -d 400MHz -u 1.0GHz
+sudo cpufreq-set -c 5 -d 400MHz -u 1.0GHz
+sudo cpufreq-set -c 6 -d 400MHz -u 1.0GHz
+sudo cpufreq-set -c 7 -d 400MHz -u 1.0GHz
+sudo cpufreq-set -c 8 -d 400MHz -u 1.0GHz
+sudo cpufreq-set -c 9 -d 400MHz -u 1.0GHz
+sudo cpufreq-set -c 10 -d 400MHz -u 1.0GHz
+sudo cpufreq-set -c 11 -d 400MHz -u 1.0GHz
+sudo cpufreq-set -c 12 -d 400MHz -u 1.0GHz
+sudo cpufreq-set -c 13 -d 400MHz -u 1.0GHz
+sudo cpufreq-set -c 14 -d 400MHz -u 1.0GHz
+sudo cpufreq-set -c 15 -d 400MHz -u 1.0GHz
+```
+```sh
+cpupower frequency-info -l
+sudo cpupower frequency-set --min 400000
+sudo cpupower frequency-set --max 1000000
+```
+```sh
+
+```
+
+[2020 Zephyrus G14 Linux 充電時高溫，而且沒有 amd-pstate 支援？](https://www.reddit.com/r/ZephyrusG14/comments/16vf3z2/2020_zephyrus_g14_linux_high_temperatures_while/?tl=zh-hant)
+[asus-linux](https://asus-linux.org/)
+[asusctl](https://gitlab.com/asus-linux/asusctl)
+```sh
+sudo apt install make cargo gcc pkg-config openssl libasound2-dev cmake build-essential python3 libfreetype6-dev libexpat1-dev libxcb-composite0-dev libssl-dev libx11-dev libfontconfig1-dev curl libclang-dev libudev-dev checkinstall libseat-dev libinput-dev libxkbcommon-dev libgbm-dev
+git clone https://gitlab.com/asus-linux/asusctl.git
+
+make
+sudo make install
+
+```
+
+
+
 ##### 參考資料：
 [1] [Managing CPU frequency for AMD on Ubuntu 22.04](https://smalldatum.blogspot.com/2024/10/managing-cpu-frequency-for-amd-on.html)<br>
 [2] [關掉 AMD Ryzen 7 4800H 的 CPU 增強功能](https://www.reddit.com/r/Ubuntu/comments/13elvor/is_it_possible_to_disable_cpu_boost_for_amd_ryzen/?tl=zh-hant)<br>
