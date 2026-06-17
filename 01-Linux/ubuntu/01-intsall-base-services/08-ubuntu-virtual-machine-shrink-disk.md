@@ -3,6 +3,11 @@
 <p style="font-size: 90%">1. 檔案系統重組 (線上重組即可，無須卸載任何設備)</p>
 
 ```sh
+# Clean Junk Files Inside Ubuntu
+sudo apt autoremove
+sudo apt clean
+
+# 檔案系統重組
 sudo e4defrag /
 ```
 

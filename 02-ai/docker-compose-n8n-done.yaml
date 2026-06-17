@@ -59,10 +59,8 @@ services:
       - "--certificatesresolvers.mytlschallenge.acme.email=${SSL_EMAIL}"
       - "--certificatesresolvers.mytlschallenge.acme.storage=/letsencrypt/acme.json"
     ports:
-      #- "80:80"
-      #- "443:443"
-      - ${TRAEFIK_80-80}:80
-      - ${TRAEFIK_443-443}:443
+      - "80:80"
+      - "443:443"
     volumes:
       - traefik_data:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -100,50 +98,10 @@ services:
       - WEBHOOK_URL=https://${SUBDOMAIN}.${DOMAIN_NAME}/
       - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
       - TZ=${GENERIC_TIMEZONE}
-      - N8N_SECURE_COOKIE=false
+      - N8N_SECURE_COOKIE=false 
     volumes:
       - n8n_data:/home/node/.n8n
       - ./local-files:/files
-    depends_on:
-      - ollama
-    extra_hosts:
-      - host.docker.internal:host-gateway
-    networks:
-      - web-app-bridge
-
-  comfyui:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: "yanwk/comfyui-boot:cu126-slim"
-    container_name: comfyui
-    ports:
-      #- "8188:8188"
-      - ${COMFYUI_PORT-8188}:8188
-    volumes:
-      # persist your models, output, and settings:
-      - comfyui-data:/app/ComfyUI/models
-
-      # persist your output images:
-      - comfyui-data:/app/ComfyUI/output
-      
-      # persist all your settings & extra nodes:
-      - comfyui-data:/app/ComfyUI/user/default:rw
-
-      # persist just your saved flows (overrides the workflows/ in default):
-      - comfyui-data:/app/ComfyUI/user/default/workflows:rw
-    environment:
-      - CLI_ARGS=--listen # 加上listen，讓外部網路能存取ComfyUI
-    ## GPU support
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #         - driver: ${COMFYUI_GPU_DRIVER-nvidia}
-    #           count: ${COMFYUI_GPU_COUNT-1}
-    #           capabilities:
-    #             - gpu
-    restart: unless-stopped
     depends_on:
       - ollama
     extra_hosts:
@@ -156,7 +114,6 @@ volumes:
   open-webui: {}
   n8n_data: {}
   traefik_data: {}
-  comfyui-data: {}
 
 networks:
   web-app-bridge:
