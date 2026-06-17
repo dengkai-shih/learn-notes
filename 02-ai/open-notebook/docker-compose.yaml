@@ -1,0 +1,95 @@
+services:
+  ollama:
+    volumes:
+      - ollama:/root/.ollama
+    container_name: ollama
+    pull_policy: always
+    tty: true
+    restart: unless-stopped
+    image: ollama/ollama:${OLLAMA_DOCKER_TAG-latest}
+    # Expose Ollama API outside the container stack
+    ports:
+      - 11434:11434
+    ## GPU support
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: ${OLLAMA_GPU_DRIVER-nvidia}
+    #           count: ${OLLAMA_GPU_COUNT-1}
+    #           capabilities:
+    #             - gpu
+    #extra_hosts:
+    #  - host.docker.internal:host-gateway
+    networks:
+      - web-app-bridge
+
+  surrealdb:
+    image: surrealdb/surrealdb:v2
+    container_name: surrealdb
+    command: start --log info --user root --pass root rocksdb:/mydata/mydatabase.db
+    user: root  # Required for bind mounts on Linux
+    ports:
+      - "8000:8000"
+      #- ${SURREALDB-8000}:8000
+    volumes:
+      - ./surreal_data:/mydata
+    environment:
+      - SURREAL_EXPERIMENTAL_GRAPHQL=true
+    restart: always
+    pull_policy: always
+    networks:
+      - web-app-bridge
+
+  speaches:
+    image: ghcr.io/speaches-ai/speaches:latest-cpu
+    container_name: speaches
+    ports:
+      - "8969:8000"
+      #- ${SPEACHES-8969}:8000 
+    volumes:
+      - hf-hub-cache:/home/ubuntu/.cache/huggingface/hub
+    restart: unless-stopped
+    networks:
+      - web-app-bridge
+    # For GPU acceleration, use: ghcr.io/speaches-ai/speaches:latest-cuda
+    # and add GPU device mapping (see docs)
+
+  open_notebook:
+    image: lfnovo/open_notebook:v1-latest
+    container_name: open_notebook
+    ports:
+      - "8502:8502"  # Web UI
+      - "5055:5055"  # REST API
+    environment:
+      # REQUIRED: Change this to your own secret string
+      - OPEN_NOTEBOOK_ENCRYPTION_KEY=change-me-to-a-secret-string
+
+      # Database connection
+      - SURREAL_URL=ws://surrealdb:8000/rpc
+      - SURREAL_USER=root
+      - SURREAL_PASSWORD=root
+      - SURREAL_NAMESPACE=open_notebook
+      - SURREAL_DATABASE=open_notebook
+
+      # Ollama connection (optional, can also configure via UI)
+      - OLLAMA_BASE_URL=http://ollama:11434
+    volumes:
+      - ./notebook_data:/app/data
+    depends_on:
+      - surrealdb
+      - ollama
+    restart: always
+    pull_policy: always
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      - web-app-bridge
+
+volumes:
+  ollama: {}
+  hf-hub-cache: {}
+
+networks:
+  web-app-bridge:
+    external: true

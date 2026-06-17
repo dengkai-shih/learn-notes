@@ -9,7 +9,8 @@ services:
     image: ollama/ollama:${OLLAMA_DOCKER_TAG-latest}
     # Expose Ollama API outside the container stack
     ports:
-      - ${OLLAMA_WEBAPI_PORT-11434}:11434
+      - 11434:11434
+      #- ${OLLAMA_WEBAPI_PORT-11434}:11434
     ## GPU support
     # deploy:
     #   resources:
@@ -19,6 +20,8 @@ services:
     #           count: ${OLLAMA_GPU_COUNT-1}
     #           capabilities:
     #             - gpu
+    #extra_hosts:
+    #  - host.docker.internal:host-gateway
     networks:
       - web-app-bridge
 
@@ -33,7 +36,8 @@ services:
     depends_on:
       - ollama
     ports:
-      - ${OPEN_WEBUI_PORT-3000}:8080
+      - 3000:8080
+      #- ${OPEN_WEBUI_PORT-3000}:8080
     environment:
       - 'OLLAMA_BASE_URL=http://ollama:11434'
       - 'WEBUI_SECRET_KEY='
@@ -61,6 +65,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+      #- ${TRAEFIK_PORT_80-80}:80
+      #- ${TRAEFIK_PORT_443-443}:443
     volumes:
       - traefik_data:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -72,8 +78,9 @@ services:
     container_name: n8n
     restart: always
     ports:
+      - "5678:5678"
       #- "127.0.0.1:5678:5678"
-      - ${N8N_WEBAPI_PORT-5678}:5678
+      #- ${N8N_WEBAPI_PORT-5678}:5678
     labels:
       - traefik.enable=true
       - traefik.http.routers.n8n.rule=Host(`${SUBDOMAIN}.${DOMAIN_NAME}`)
@@ -98,7 +105,7 @@ services:
       - WEBHOOK_URL=https://${SUBDOMAIN}.${DOMAIN_NAME}/
       - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
       - TZ=${GENERIC_TIMEZONE}
-      - N8N_SECURE_COOKIE=false 
+      - N8N_SECURE_COOKIE=false
     volumes:
       - n8n_data:/home/node/.n8n
       - ./local-files:/files
@@ -109,11 +116,80 @@ services:
     networks:
       - web-app-bridge
 
+  surrealdb:
+    image: surrealdb/surrealdb:v2
+    container_name: surrealdb
+    command: start --log info --user root --pass root rocksdb:/mydata/mydatabase.db
+    user: root  # Required for bind mounts on Linux
+    ports:
+      - "8000:8000"
+      #- ${SURREALDB-8000}:8000
+    volumes:
+      - ./surreal_data:/mydata
+      #- surrealdb:./surreal_data:/mydata
+    environment:
+      - SURREAL_EXPERIMENTAL_GRAPHQL=true
+    restart: always
+    pull_policy: always
+    networks:
+      - web-app-bridge
+
+  speaches:
+    image: ghcr.io/speaches-ai/speaches:latest-cpu
+    container_name: speaches
+    ports:
+      - "8969:8000"
+      #- ${SPEACHES-8969}:8000 
+    volumes:
+      - hf-hub-cache:/home/ubuntu/.cache/huggingface/hub
+    restart: unless-stopped
+    networks:
+      - web-app-bridge
+    # For GPU acceleration, use: ghcr.io/speaches-ai/speaches:latest-cuda
+    # and add GPU device mapping (see docs)
+
+  open_notebook:
+    image: lfnovo/open_notebook:v1-latest
+    container_name: open_notebook
+    ports:
+      - "8502:8502"  # Web UI
+      - "5055:5055"  # REST API
+      #- ${OPEN_NB_WEB_UI-8502}:8502  # Web UI
+      #- ${OPEN_NB_REST_API-5055}:5055  # REST API
+    environment:
+      # REQUIRED: Change this to your own secret string
+      - OPEN_NOTEBOOK_ENCRYPTION_KEY=change-me-to-a-secret-string
+
+      # Database connection
+      - SURREAL_URL=ws://surrealdb:8000/rpc
+      - SURREAL_USER=root
+      - SURREAL_PASSWORD=root
+      - SURREAL_NAMESPACE=open_notebook
+      - SURREAL_DATABASE=open_notebook
+
+      # Ollama connection (optional, can also configure via UI)
+      - OLLAMA_BASE_URL=http://ollama:11434
+    volumes:
+      - ./notebook_data:/app/data
+      #- open_notebook:./notebook_data:/app/data
+    depends_on:
+      - surrealdb
+      - ollama
+    restart: always
+    pull_policy: always
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      - web-app-bridge
+
 volumes:
   ollama: {}
   open-webui: {}
   n8n_data: {}
   traefik_data: {}
+  #surrealdb: {}
+  #open_notebook: {}
+  hf-hub-cache: {}
 
 networks:
   web-app-bridge:

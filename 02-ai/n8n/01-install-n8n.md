@@ -31,13 +31,19 @@ mkdir local-files
 
 The Docker Compose file below can automatically create this directory, but doing it manually ensures that it's created with the right ownership and permissions.
 
-#### 3. Create Docker Compose file
-Create a ```compose.yaml``` file. Paste the following in the file:
+#### 3. Create Docker Networks
+```sh
+sudo docker create network web-app-bridge
+```
+
+#### 4. Create Docker Compose file
+Create a ```docker-compose.yaml``` file. Paste the following in the file:
 ```yaml
-# compose.yaml file
+# docker-compose.yaml file
 services:
   traefik:
     image: "traefik"
+    container_name: traefik
     restart: always
     command:
       - "--api.insecure=true"
@@ -51,19 +57,23 @@ services:
       - "--certificatesresolvers.mytlschallenge.acme.email=${SSL_EMAIL}"
       - "--certificatesresolvers.mytlschallenge.acme.storage=/letsencrypt/acme.json"
     ports:
-      - "80:80"
-      - "443:443"
+      #- "80:80"
+      #- "443:443"
+      - ${TRAEFIK_PORT_80-80}:80
+      - ${TRAEFIK_PORT_443-443}:443
     volumes:
       - traefik_data:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
-      - web_app_bridge
+      - web-app-bridge
 
   n8n:
-    image: docker.n8n.io/n8nio/n8n
+    image: docker.n8n.io/n8nio/n8n:latest
+    container_name: n8n
     restart: always
     ports:
-      - "127.0.0.1:5678:5678"
+      #- "127.0.0.1:5678:5678"
+      - ${N8N_WEBAPI_PORT-5678}:5678
     labels:
       - traefik.enable=true
       - traefik.http.routers.n8n.rule=Host(`${SUBDOMAIN}.${DOMAIN_NAME}`)
@@ -91,16 +101,20 @@ services:
     volumes:
       - n8n_data:/home/node/.n8n
       - ./local-files:/files
+    depends_on:
+      - ollama
+    extra_hosts:
+      - host.docker.internal:host-gateway
     networks:
-      - web_app_bridge
+      - web-app-bridge
 
 volumes:
-  n8n_data:
-  traefik_data:
+  n8n_data: {}
+  traefik_data: {}
 
 networks:
-  web_app_bridge:
-    driver: bridge
+  web-app-bridge:
+    external: true
 ```
 
 #### 
