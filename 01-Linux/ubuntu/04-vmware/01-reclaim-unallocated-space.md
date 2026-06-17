@@ -11,7 +11,7 @@ sudo e4defrag /
 #### 3. 未使用空間填入空白資料, 好讓 VMware 知道那些空間是可以被回收的
 ```sh
 # 在終端機中執行以下命令，將剩餘空間填入零。
-sudo dd if=/dev/zero of=blankfreespace bs=1M; sudo sync
+sudo dd if=/dev/zero of=blankfreespace bs=1M; sudo sync;
 ```
 ```sh
 # 命令完成後（可能會顯示“設備上沒有剩餘空間”，這是正常現象），請刪除臨時檔案以釋放空間。
