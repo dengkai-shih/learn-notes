@@ -1,10 +1,10 @@
-#### 1. Create an ```.env``` file
-Create a project directory to store your n8n environment configuration and Docker Compose files and navigate inside:
+#### 1. 建立一個 ```.env``` 文件
+建立一個專案目錄來儲存您的 n8n 環境配置和 Docker Compose 文件，並進入該目錄：
 ```sh
 mkdir n8n-compose
 cd n8n-compose
 ```
-Inside the ```n8n-compose``` directory, create an ```.env``` file to customize your n8n instance's details. Change it to match your own information:
+在目錄下 ```n8n-compose``` 建立一個 ```.env``` 文件，用於自訂您的 n8n 實例的詳細資訊。將其修改為與您自己的資訊相符：
 ```ini
 # .env file
 # DOMAIN_NAME and SUBDOMAIN together determine where n8n will be reachable from
@@ -23,21 +23,21 @@ GENERIC_TIMEZONE=Asia/Taipei
 # The email address to use for the TLS/SSL certificate creation
 SSL_EMAIL=user@example.com
 ```
-#### 2. Create local files directory
-Inside your project directory, create a directory called local-files for sharing files between the n8n instance and the host system (for example, using the Read/Write Files from Disk node):
+#### 2. 建立本機檔案目錄
+專案目錄中，建立一個名為 ```local-files``` 的目錄，用於在 n8n 實例和主機系統之間共用檔案（例如，使用「從磁碟讀取/寫入檔案」節點）：
 ```sh
 mkdir local-files
 ```
 
-The Docker Compose file below can automatically create this directory, but doing it manually ensures that it's created with the right ownership and permissions.
+下面的 Docker Compose 檔案可以自動建立此目錄，但手動建立可確保以正確的所有權和權限建立目錄。
 
-#### 3. Create Docker Networks
+#### 3. 建立 Docker Bridge 網路
 ```sh
 sudo docker create network web-app-bridge
 ```
 
-#### 4. Create Docker Compose file
-Create a ```docker-compose.yaml``` file. Paste the following in the file:
+#### 4.  建立 Docker Compose 文件
+建立一個 ```docker-compose.yaml``` 文件。將以下內容貼到該文件中：
 ```yaml
 # docker-compose.yaml file
 services:
@@ -117,7 +117,22 @@ networks:
     external: true
 ```
 
-#### 
+#### 5. 使用 docker-compose 啟動 n8n 容器服務
+```sh
+sudo docker compose up -d
+```
+
+#### 6. 使用 docker-compose 更新 n8n 容器服務
+```sh
+# 1. Pull updated image
+sudo docker compose pull
+
+# 2. Recreate containers
+sudo docker compose up -d
+
+# 3. Prune Old Images
+sudo docker image prune -f
+```
 
 #### + reference +
 <ol>
