@@ -1,5 +1,5 @@
 
-#### 使用 Docker 部署 Open WebUI + Ollama 語言模型 Web 介面
+#### 使用 Docker 部署 Open WebUI 介面 與 Ollama 語言模型介面
 #### 1. 在 Ubuntu 上安裝 Docker Engine
 ##### 1-1. 移除舊版本 Docker Engine
 ```sh

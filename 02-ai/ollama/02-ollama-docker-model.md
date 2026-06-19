@@ -1,3 +1,4 @@
+#### 抓取 / 移除大型語言模型
 #### 1. 下載/抓取大型語言模型（Large Language Model, LLM）
 以 [gemma](https://ollama.com/library/gemma4) 大型語言模型為例：
 ```sh
