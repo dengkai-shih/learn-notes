@@ -29,6 +29,4 @@ sudo vmware-toolbox-cmd disk shrinkonly
 <li><a href="https://askubuntu.com/questions/5980/how-do-i-free-up-disk-space" target="_blank">How do I free up disk space?</a></li>
 <li><a href="https://www.omgubuntu.co.uk/2016/08/5-ways-free-up-space-on-ubuntu" target="_blank">Essential Guide: 5 Simple Ways To Free Up Space on Ubuntu</a></li>
 <li><a href="https://superuser.com/questions/890710/vmware-player-disk-clean-up" target="_blank">VMware player disk clean up</a></li>
-<li><a href="" target="_blank"></a></li>
-<li><a href="" target="_blank"></a></li>
 </ol>

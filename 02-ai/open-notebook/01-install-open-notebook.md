@@ -1,3 +1,4 @@
+#### 使用 Docker 部署 Open Notebook 介面 與 Ollama 語言模型介面
 Open Notebook 的最佳安裝方式是透過 Docker Compose 來佈署
 #### 一、 準備工作
 1. **必備硬體與軟體**：電腦需至少 4GB 記憶體，並安裝好 Docker 軟體 Open Notebook 完整部署教程：打造私有化NotebookLM 替代方案。<br>
@@ -123,5 +124,4 @@ docker compose up -d
 <li><a href="https://www.find.org.tw/tech_obser/browse/516a1e433a0435028da95f53d2e01d41" target="_blank">Open Notebook：不想讓 Google 看光你的研究？這個開源專案是你的解答</a></li>
 <li><a href="https://www.open-notebook.ai/" target="_blank">Open Notebook</a></li>
 <li><a href="https://github.com/lfnovo/open-notebook" target="_blank">(GitHub)open-notebook</a></li>
-<li><a href="" target="_blank"></a></li>
 </ol>

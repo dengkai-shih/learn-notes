@@ -11,9 +11,37 @@
 
 <h2>learn-notes</h2>
 <h3>01-Linux 相關資訊</h3>
+<ul>
+<li><p>Ubuntu Linux</p>
+<ul>
+<li><p>基本服務安裝步驟：</p>
+</li>
+
+<li><p>GUI與相關軟體安裝步驟：</p>
+</li>
+
+<li><p>伺服器軟體安裝步驟：</p>
+</li>
+
+<li><p>vmware：</p>
+<ol>
+<li><a href="01-Linux/ubuntu/04-vmware/01-reclaim-unallocated-space.md" target="_blank">縮小 Ubuntu VMware 虛擬機器占用的實體硬碟空間</a></li>
+</ol>
+</li>
+
+<li>
+</li>
+
+</ul>
+</li>
+
+<li>
+</li>
+
+</ul>
 <h3>02-ai 相關資訊</h3>
 <ul>
-<li><b>Ollama 相關資訊：</b>
+<li><b>Ollama 安裝步驟：</b>
 <ol>
 <li><a href="02-ai/ollama/01-ollama-docker.md" target="_blank">使用 Docker 部署 Open WebUI 介面 與 Ollama 語言模型介面</a></li>
 <li><a href="02-ai/ollama/02-ollama-docker-model.md" target="_blank">抓取 / 移除大型語言模型</a></li>
@@ -21,9 +49,15 @@
 </ol>
 </li>
 
-<li><b>n8n 相關資訊：</b>
+<li><b>n8n 安裝步驟：</b>
 <ol>
 <li><a href="02-ai/n8n/01-install-n8n.md" target="_blank">使用 Docker 部署 n8n 套件</a></li>
+</ol>
+</li>
+
+<li><b>open notebook 安裝步驟：</b>
+<ol>
+<li><a href="02-ai/open-notebook/01-install-open-notebook.md" target="_blank">使用 Docker 部署 Open Notebook 介面 與 Ollama 語言模型介面</a></li>
 </ol>
 </li>
 </ul>

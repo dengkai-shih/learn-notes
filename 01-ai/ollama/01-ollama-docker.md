@@ -1,2 +1,0 @@
-# 01-ollama-docker
-

@@ -187,6 +187,112 @@ sudo docker image prune -f
 
 ![](img/ollama-open-webui-vision.png "ollama open webui vision")
 
+#### + 架構圖 +
+**Open WebUI 介面：**
+```mermaid
+%% Open WebUI 介面
+graph TD
+    %% 定義樣式
+    classDef frontend fill:#e1f5fe,stroke:#0288d1,stroke-width:2px;
+    classDef backend fill:#e8f5e9,stroke:#388e3c,stroke-width:2px;
+    classDef storage fill:#fff3e0,stroke:#f57c00,stroke-width:2px;
+    classDef ai fill:#fce4ec,stroke:#c2185b,stroke-width:2px;
+
+    %% 前端
+    subgraph Frontend [前端介面]
+        UI[Web UI / 聊天介面]:::frontend
+        Art[Artifacts / 即時渲染]:::frontend
+    end
+
+    %% 後端
+    subgraph Backend [後端處理中心 - FastAPI]
+        API[API Endpoints]:::backend
+        Auth[認證與權限]:::backend
+        RAG[RAG 檢索增強]:::backend
+        Pipe[Pipelines 擴充功能]:::backend
+    end
+
+    %% 資料庫
+    subgraph Database [資料儲存]
+        DB[(關聯式 DB - SQLite/Postgres)]:::storage
+        Vec[(向量資料庫 - Chroma/Milvus)]:::storage
+    end
+
+    %% 外部 AI
+    subgraph AI_Models [語言模型與工具]
+        Ollama[Ollama / 本地模型]:::ai
+        OpenAI[OpenAI / 雲端模型]:::ai
+        ExtAPI[外部 API / 網路搜尋]:::ai
+    end
+
+    %% 連線與資料流
+    UI -->|發送請求 & 檔案| API
+    API --> Auth
+    API --> DB
+    
+    %% RAG 流程
+    API --> RAG
+    RAG --> Vec
+    
+    %% Pipeline 流程
+    API --> Pipe
+    
+    %% 呼叫模型
+    Pipe -->|呼叫 API| Ollama
+    Pipe -->|呼叫 API| OpenAI
+    Pipe -->|呼叫工具| ExtAPI
+    
+    %% 回傳結果
+    Ollama -->|Stream 回應| UI
+    OpenAI -->|Stream 回應| UI
+    ExtAPI -->|檢索結果| UI
+    UI --> Art
+```
+
+<br>**Ollama 語言模型介面**
+```mermaid
+%%Ollama 語言模型介面
+graph TD
+    %% 樣式設定
+    classDef client fill:#d4edda,stroke:#28a745,stroke-width:2px;
+    classDef ollama fill:#e2e3e5,stroke:#383d41,stroke-width:2px;
+    classDef model fill:#cce5ff,stroke:#007bff,stroke-width:2px;
+
+    %% 客戶端層
+    subgraph ClientLayer ["1. 客戶端 (Client)"]
+        CLI[命令列介面 CLI]:::client
+        API[HTTP API 請求]:::client
+        App[第三方應用程式/Web UI]:::client
+    end
+
+    %% Ollama 核心服務層
+    subgraph OllamaServer ["2. Ollama 核心服務 (Go 語言)"]
+        Router[API 路由器 / 處理器]:::ollama
+        PromptEngine[提示詞處理引擎]:::ollama
+        Runner[模型運行器]:::ollama
+    end
+
+    %% 儲存與模型層
+    subgraph ModelLayer ["3. 模型與硬體層"]
+        ModelStorage[(本機模型庫 / Registry)]:::model
+        CPUGPU[CPU / GPU 運算資源]:::model
+    end
+
+    %% 流程連線
+    CLI & API & App -->|發送 Prompt 與設定| Router
+    Router --> PromptEngine
+    PromptEngine -->|載入模型| Runner
+    Runner -->|載入權重| ModelStorage
+    Runner -->|平行張量運算| CPUGPUSub
+    CPUGPU -->|回傳生成結果| Runner
+    Runner -->|Tokens 串流| Router
+    Router -->|回應結果| ClientLayer
+
+    subgraph CPUGPUSub ["硬體加速"]
+        CPUGPU
+    end
+```
+
 #### + reference +
 <ol>
 <li><a href="https://ivonblog.com/posts/ollama-llm-docker/" target="_blank">Linux用docker-compose部署Open WebUI + Ollama語言模型網頁界面</a></li>
