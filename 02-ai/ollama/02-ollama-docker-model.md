@@ -1,28 +1,16 @@
-#### 1. pull model
-#### example : [gemma](https://ollama.com/library/gemma4)
+#### 1. 下載/抓取大型語言模型（Large Language Model, LLM）
+以 [gemma](https://ollama.com/library/gemma4) 大型語言模型為例：
 ```sh
 # pull 'gemma'
 docker exec -it ollama ollama pull gemma:7b
 ```
-#### 2. remove model
-#### example : [gemma](https://ollama.com/library/gemma4)
+#### 2. 移除大型語言模型（Large Language Model, LLM）
+以 [gemma](https://ollama.com/library/gemma4) 大型語言模型為例：
 ```sh
 # pull 'gemma'
 docker exec -it ollama ollama rm gemma:7b
 ```
-#### + reference +
-<ol>
-<li><a href="https://ivonblog.com/posts/ollama-llm-docker/" target="_blank">Linux用docker-compose部署Open WebUI + Ollama語言模型網頁界面</a></li>
-<li><a href="https://ollama.com/" target="_blank">Ollama 官網</a></li>
-<li><a href="https://github.com/ollama/ollama" target="_blank">Ollama GitHub</a></li>
-<li><a href="https://ollama.com/search" target="_blank">Ollama Model</a></li>
-<li><a href="Ollama Model huihui" target="_blank">https://ollama.com/huihui_ai</a></li>
-<li><a href="Ollama Model cwchang" target="_blank">https://ollama.com/cwchang</a></li>
-<li><a href="" target="_blank"></a></li>
-<li><a href="" target="_blank"></a></li>
-</ol>
-
-#### + ollama model +
+#### + Ollama 大型語言模型相關儲存庫 +
 #### (tools)
 ##### [![](img/gemma4.png "gemma model")](https://ollama.com/library/gemma4)
 ```sh
@@ -164,6 +152,16 @@ docker exec -it ollama ollama pull embeddinggemma:latest
 
 ##### [![](img/nomic-embed-text.svg "nomic-embed-text")](https://ollama.com/library/nomic-embed-text)
 ```sh
-# "embeddinggemma" 300 M Parameter Count (622GB)
+# "embeddinggemma" 300 M Parameter Count (622MB)
 docker exec -it ollama ollama pull nomic-embed-text:latest
 ```
+
+#### + reference +
+<ol>
+<li><a href="https://ivonblog.com/posts/ollama-llm-docker/" target="_blank">Linux用docker-compose部署Open WebUI + Ollama語言模型網頁界面</a></li>
+<li><a href="https://ollama.com/" target="_blank">Ollama 官網</a></li>
+<li><a href="https://github.com/ollama/ollama" target="_blank">Ollama GitHub</a></li>
+<li><a href="https://ollama.com/search" target="_blank">Ollama Model</a></li>
+<li><a href="Ollama Model huihui" target="_blank">https://ollama.com/huihui_ai</a></li>
+<li><a href="Ollama Model cwchang" target="_blank">https://ollama.com/cwchang</a></li>
+</ol>
