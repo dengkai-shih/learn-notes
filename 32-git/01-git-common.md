@@ -1,6 +1,6 @@
-# Git 常用指令表
+#### Git 常用指令表
 本篇為常用的 Git 指令資訊。
-## 1. Git 設定資訊
+##### 1. Git 設定資訊
 | Git 指令 | 指令說明 | 註記 |
 | :--- | :--- | :--- |
 | ```git config --list``` | **列出所有 Git 在目前位置的設定值**（包含使用者名稱、信箱、編輯器偏好、遠端 URL 縮寫等）。 | (1) **System(系統層級)**：作用於整台電腦的所有使用者 (```--system```)。<br>(2) **Global(全域層級)**：作用於該使用者帳號的所有專案 (```--global```)。<br>(3) **Local(專案層級)**：作用於當前所在的專案目錄 (```--local```)。 |
@@ -9,14 +9,14 @@
 | ```git config --local user.name "(userName)"``` | Git 中用來**查詢或設定「特定專案(本地儲存庫)」使用者名稱**的指令。 | (3) **Local(專案層級)** |
 | ```git config --local user.email "(e-mail)"``` |  Git 中用來**查詢或設定「特定專案(本地儲存庫)」使用者 E-mail** 的指令。 | (3) **Local(專案層級)** |
 
-## 2. init / clone / remove
+##### 2. init / clone / remove
 | Git 指令 | 指令說明 | 註記 |
 | :--- | :--- | :--- |
 | ```git clone <遠端儲存庫網址>``` | ```git clone``` **是用來將遠端的 Git 儲存庫(Repository)完整下載到本地電腦的指令**。 它不只下載檔案，還會同步所有的歷史提交紀錄、分支與標籤。 |  |
 | ```git init``` | ```git init``` 是一個**用於當前目錄初始化一個全新 Git 本地儲存庫(Repository)的指令**。 |  |
 | ```rm -rf .git``` | 執行 ```rm -rf .git``` 指令會**立即且永久刪除當前目錄下的 .git 隱藏資料夾，導致該專案完全脫離 Git 版本控制**。 |  |
 
-## 3. remote
+##### 3. remote
 | Git 指令 | 指令說明 | 註記 |
 | :--- | :--- | :--- |
 | ```git remote -v``` | ```git remote -v``` 是 Git 用來**列出目前專案中所有已設定的遠端倉庫(Remote Repositories)名稱及其對應 URL 網址**的指令。其中 -v 代表 --verbose（詳細資訊）。 | **欄位**<br>```origin```：遠端倉庫在本地端的縮寫代稱(預設通常為 origin)。<br>```https://...```：該遠端倉庫的實際儲存庫網址。<br>```(fetch)```：當你執行 ```git fetch``` 或 ```git pull``` 時，Git 會從這個網址下載資料。<br>```(push)```：當你執行 ```git push``` 時，Git 會把你的代碼推送到這個網址。 |
@@ -25,7 +25,7 @@
 | ```git remote remove <遠端倉庫別名>``` | 要移除 Git 的遠端倉庫連結(通常名為 ```origin```)，請使用指令：```git remote remove origin```。 |  |
 | ```git push -u (origin) (main)``` | 指令 ```git push -u origin main``` 的主要作用是**將本地的 ```main``` 分支推送到名為 origin 的遠端數據庫，並同時建立兩者之間的追蹤(Upstream)關係**。 | **拆解指令含義**<br>```git push```：將本地的提交(Commits)上傳並合併到遠端數據庫。<br>**```-u``` (或 --set-upstream)**：最關鍵的參數。它負責建立本地分支與遠端分支的「追蹤連結」。設定成功後，未來你在這個分支下只需要輸入 ```git push``` 或 ```git pull```，Git 就會自動知道要與遠端的哪個分支進行同步，不需要再重複輸入遠端與分支名稱。<br>```origin```：遠端數據庫的預設代稱(例如存在 GitHub、GitLab 或 Bitbucket 上的專案位置)。<br>```main```：你要推送的本地分支名稱。 |
 
-## 4. 基本版更 ( pull / push / add / commit / status )
+##### 4. 基本版更 ( pull / push / add / commit / status )
 | Git 指令 | 指令說明 | 註記 |
 | :--- | :--- | :--- |
 | ```git status``` |  是 ```Git``` 中最核心的指令之一。它主要用來查看目前 ```Git``` 倉庫的狀態，幫助你了解目前目錄中哪些檔案被修改了、哪些檔案已經加入暫存區```(Staged)```、以及哪些檔案尚未被 ```Git``` 追蹤。 |  |
@@ -39,10 +39,9 @@
 | ```git restore --staged [file]``` | 這個指令的核心作用是將檔案移出暫存區(Staging Area)，也就是取消剛才的 ```git add``` 操作，但會完整保留你在檔案中寫好的修改內容。 | (1) **取消暫存單一檔案**<br>```git restore --staged <檔案名稱>```<br>(2) **取消暫存所有檔案**<br>```git restore --staged .``` |
 | `````` |  |  |
 
-## + 參考資料 +
-#### 1. ["Git &rarr; Learn &rarr; Book (指令手冊)"](https://git-scm.com/book/zh-tw/v2/%e9%96%8b%e5%a7%8b-%e9%97%9c%e6%96%bc%e7%89%88%e6%9c%ac%e6%8e%a7%e5%88%b6)
-#### 2. [Git 常用指令表 : https://ithelp.ithome.com.tw/m/articles/10241407](https://ithelp.ithome.com.tw/m/articles/10241407)
-
-| Git 指令 | 指令說明 | 註記 |
-| :--- | :--- | :--- |
-| `````` |  |  |
+#### + reference +
+<ol>
+<li><a href="https://git-scm.com/book/zh-tw/v2/%e9%96%8b%e5%a7%8b-%e9%97%9c%e6%96%bc%e7%89%88%e6%9c%ac%e6%8e%a7%e5%88%b6" target="_blank">Git &rarr; Learn &rarr; Book (指令手冊)</a></li>
+<li><a href="https://ithelp.ithome.com.tw/m/articles/10241407" target="_blank">Git 常用指令表</a></li>
+<li><a href="" target="_blank"></a></li>
+</ol>
