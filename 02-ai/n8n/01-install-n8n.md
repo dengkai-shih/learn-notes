@@ -136,6 +136,7 @@ sudo docker image prune -f
 ```
 
 #### + 架構圖 +
+**Core n8n Architecture**
 ```mermaid
 graph TD
     subgraph UI ["Visual Editor (Frontend)"]
@@ -175,8 +176,4 @@ graph TD
 <ol>
 <li><a href="https://docs.n8n.io/hosting/installation/server-setups/docker-compose/" target="_blank">Hosting n8n Docker-Compose</a></li>
 <li><a href="https://github.com/n8n-io/n8n" target="_blank">n8n - Secure Workflow Automation for Technical Teams</a></li>
-<li><a href="" target="_blank"></a></li>
-<li><a href="" target="_blank"></a></li>
-<li><a href="" target="_blank"></a></li>
-<li><a href="" target="_blank"></a></li>
 </ol>
