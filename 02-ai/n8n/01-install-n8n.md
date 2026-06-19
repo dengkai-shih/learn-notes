@@ -135,6 +135,42 @@ sudo docker compose up -d
 sudo docker image prune -f
 ```
 
+#### + 架構圖 +
+```mermaid
+graph TD
+    subgraph UI ["Visual Editor (Frontend)"]
+        Web[Web Browser / Vue.js]
+    end
+
+    subgraph Core ["n8n Backend API (Main Process)"]
+        API[REST API]
+        Sched[Scheduler / Cron]
+        ExecEngine[Execution Engine]
+    end
+
+    subgraph Storage ["Persistent State"]
+        DB[(PostgreSQL / SQLite)]
+        KV[(Redis / Queue)]
+    end
+
+    subgraph Workers ["Execution Cluster (Queue Mode)"]
+        W1[Worker 1]
+        W2[Worker 2]
+        W3[Worker ... N]
+    end
+
+    Web -->|Build & Manage| API
+    API -->|Store & Fetch Data| DB
+    Sched -->|Trigger Workflows| ExecEngine
+    
+    %% Regular/Main mode vs Queue mode
+    ExecEngine -->|Default Execution| Workers
+    KV -->|Job Distribution| Workers
+    Workers -->|Save Job State/Logs| DB
+```
+
+
+
 #### + reference +
 <ol>
 <li><a href="https://docs.n8n.io/hosting/installation/server-setups/docker-compose/" target="_blank">Hosting n8n Docker-Compose</a></li>

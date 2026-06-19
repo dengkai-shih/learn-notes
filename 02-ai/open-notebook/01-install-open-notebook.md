@@ -119,6 +119,53 @@ networks:
 docker compose up -d
 ```
 
+#### + 架構圖 +
+<b>1. System Architecture (Component Diagram)</b>
+
+```mermaid
+graph TD
+    UI[Frontend / Chat UI] -->|REST / WebSockets| API[API Gateway / Core]
+    API -->|Async Tasks| Queue[Task Queue / Celery]
+    
+    Queue --> Orchestrator[Orchestration Engine / LangGraph]
+    
+    Orchestrator --> DB[(Vector / Relational DB)]
+    Orchestrator --> LLM_Layer[AI Provider Layer - Esperanto]
+    
+    LLM_Layer --> Local[Local Models / Ollama]
+    LLM_Layer --> Cloud_1[OpenAI / Anthropic]
+    LLM_Layer --> Cloud_2[LM Studio / Others]
+
+    classDef primary fill:#419D78,stroke:#E0A96D,stroke-width:2px,color:#fff;
+    classDef secondary fill:#0B4F6C,stroke:#011627,stroke-width:2px,color:#fff;
+    class UI,Orchestrator primary;
+    class DB,Queue secondary;
+```
+
+<br><b>2. Information Ingestion & Processing Flow (Sequence Diagram)</b>
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant UI as Open Notebook UI
+    participant Core as Core Backend
+    participant DB as Vector DB
+    participant LLM as LLM Orchestrator
+
+    User->>UI: Uploads Document / Media
+    UI->>Core: Forward File & Parse Request
+    Core->>Core: Chunk & Embed Document
+    Core->>DB: Store Vector Embeddings
+    
+    User->>UI: Submits Prompt or Query
+    UI->>Core: Send Query
+    Core->>DB: Retrieve Relevant Context
+    DB-->>Core: Context + Source Chunks
+    Core->>LLM: Generate RAG-based Response
+    LLM-->>Core: Streamed Answer & Citations
+    Core-->>UI: Display Response to User
+```
+
 #### + reference +
 <ol>
 <li><a href="https://www.find.org.tw/tech_obser/browse/516a1e433a0435028da95f53d2e01d41" target="_blank">Open Notebook：不想讓 Google 看光你的研究？這個開源專案是你的解答</a></li>
