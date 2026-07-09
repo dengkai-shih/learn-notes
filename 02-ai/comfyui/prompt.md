@@ -7,7 +7,8 @@
 [核心主體] + [細節特徵] + [場景背景] + [構圖光影] + [藝術風格]
 
 ------------------------------
-## 🎨 常用提示詞分類詞彙表## 1. 核心主體與細節 (Subject & Details)
+## 🎨 常用提示詞分類詞彙表
+## 1. 核心主體與細節 (Subject & Details)
 
 * 人物：一個20歲的台灣女性 (a 20-year-old Taiwanese woman)、精緻的五官 (refined facial features)、微笑 (smiling)。 [1] 
 * 服裝：穿著復古白色洋裝 (wearing a vintage white dress)。 [1] 
